@@ -11,8 +11,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="new_note">add new note</string>
     <string name="done">Done</string>
-    <string name="Title">Title</string>
     <string name="subtitle">Subtitle</string>
     <string name="title">Title</string>
     <string name="type_notes">type notes here</string>
+    <string name="search_notes">search notes</string>
 </resources>
