@@ -75,13 +75,14 @@
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/type_notes"
-        android:textColorHint="@color/hint_color"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
+        android:textColorHint="@color/hint_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Subtitle"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

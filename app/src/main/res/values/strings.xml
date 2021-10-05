@@ -13,6 +13,6 @@
     <string name="done">Done</string>
     <string name="subtitle">Subtitle</string>
     <string name="title">Title</string>
-    <string name="type_notes">type notes here</string>
+    <string name="type_notes">Type notes here</string>
     <string name="search_notes">search notes</string>
 </resources>
