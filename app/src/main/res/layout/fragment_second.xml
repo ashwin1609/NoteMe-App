@@ -57,13 +57,13 @@
         android:autofillHints="no"
         android:ems="10"
         android:hint="@string/title"
-        android:textColorHint="@color/hint_color"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColorHint="@color/hint_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
 
     <EditText
         android:id="@+id/type_notes"
