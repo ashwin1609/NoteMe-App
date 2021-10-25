@@ -15,4 +15,7 @@
     <string name="title">Title</string>
     <string name="type_notes">Type notes here</string>
     <string name="search_notes">search notes</string>
+    <string name="title_view">Title</string>
+    <string name="subtitle_view">Subtitle</string>
+    <string name="note_context_view">Note Context</string>
 </resources>

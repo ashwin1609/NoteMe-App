@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.noteme_app.databinding.FragmentFirstBinding;
 
@@ -20,6 +25,8 @@ public class FirstFragment extends Fragment {
     private FragmentFirstBinding binding;
     MyDatabase database;
     ArrayList<String> note_id, note_Title, note_SubTitle, note_Context;
+    CustomAdapter customAdapter;
+
 
     @Override
     public View onCreateView(
@@ -43,19 +50,25 @@ public class FirstFragment extends Fragment {
             }
         });
         database = new MyDatabase(getContext());
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
         note_id = new ArrayList<>();
         note_Title = new ArrayList<>();
         note_SubTitle = new ArrayList<>();
         note_Context = new ArrayList<>();
 
         DisplayNote();
+        customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context);
+        recyclerView.setAdapter(customAdapter);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
     }
 
         void DisplayNote() {
              Cursor cursor = database.getData();
 
             if(cursor.getCount() == 0){
-                Toast.makeText(getContext(), "NO availabe data in the database", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "NO available data in the database", Toast.LENGTH_SHORT).show();
             }else{
                 while  (cursor.moveToNext()){
                     note_id.add(cursor.getString(0));
