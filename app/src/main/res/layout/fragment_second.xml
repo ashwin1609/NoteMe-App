@@ -34,14 +34,12 @@
         android:layout_width="231dp"
         android:layout_height="50dp"
         android:layout_marginTop="97dp"
-        android:layout_marginBottom="83dp"
         android:autofillHints="No"
         android:ems="10"
         android:hint="@string/subtitle"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="@color/hint_color"
-        app:layout_constraintBottom_toBottomOf="@+id/pick_color"
         app:layout_constraintStart_toStartOf="@+id/Title"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,20 +83,16 @@
         app:layout_constraintTop_toBottomOf="@+id/Subtitle"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <EditText
-        android:id="@+id/pick_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:ems="10"
-        android:hint="@string/pick_your_colour"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Spinner
+        android:id="@+id/dropDown"
+        android:layout_width="231dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/type_notes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/Subtitle"
+        app:layout_constraintVertical_bias="0.428" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

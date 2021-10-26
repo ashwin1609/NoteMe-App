@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +46,16 @@ public class SecondFragment extends Fragment {
         TextView title = (EditText) view.findViewById(R.id.Title);
         TextView  subtitle= (EditText) view.findViewById(R.id.Subtitle);
         TextView note_Context = (EditText) view.findViewById(R.id.type_notes);
-        TextView note_color= (EditText) view.findViewById(R.id.pick_color);
+
+        Spinner mySpinner = (Spinner) view.findViewById(R.id.dropDown);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getContext(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.dropDrownMenu));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(myAdapter);
+
+
+
+        //TextView note_color= (EditText) view.findViewById(R.id.pick_color);
         //Button  donw = (EditText) view.findViewById(R.id.button_done);
         //String title1 = title.getText().toString().trim();
 

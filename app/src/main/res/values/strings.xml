@@ -20,4 +20,12 @@
     <string name="note_context_view">Note Context</string>
     <string name="search">Search</string>
     <string name="pick_your_colour">pick your colour</string>
+
+    <string-array name="dropDrownMenu" >
+        <item> Pick a color for your note </item>
+        <item> Yellow </item>
+        <item> Red </item>
+        <item> Orange </item>
+        <item> Pink </item>
+    </string-array>
 </resources>
