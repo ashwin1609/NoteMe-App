@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -44,22 +44,30 @@ public class SecondFragment extends Fragment {
         TextView title = (EditText) view.findViewById(R.id.Title);
         TextView  subtitle= (EditText) view.findViewById(R.id.Subtitle);
         TextView note_Context = (EditText) view.findViewById(R.id.type_notes);
+        TextView note_color= (EditText) view.findViewById(R.id.pick_color);
         //Button  donw = (EditText) view.findViewById(R.id.button_done);
-
+        //String title1 = title.getText().toString().trim();
 
         binding.buttonDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyDatabase database = new MyDatabase(getContext());
-                database.addNote(title.getText().toString().trim(),
-                        subtitle.getText().toString().trim(),
-                        note_Context.getText().toString().trim());
+                String title1 = title.getText().toString().trim();
 
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                if(title1.length() == 0){
+                    title.setError("Title missing");
+                }else{
+                    MyDatabase database = new MyDatabase(getContext());
+                    database.addNote(title1,
+                            subtitle.getText().toString().trim(),
+                            note_Context.getText().toString().trim());
+
+                    NavHostFragment.findNavController(SecondFragment.this)
+                            .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                }
             }
         });
     }
+
 
     @Override
     public void onDestroyView() {
