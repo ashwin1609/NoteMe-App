@@ -1,6 +1,7 @@
 package com.example.noteme_app;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +17,21 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList note_Title, note_SubTitle, note_Context;
+    private ArrayList note_Title, note_SubTitle, note_Context,note_color;
     CustomAdapter( Context context,
                    ArrayList note_Title,
                    ArrayList note_SubTitle,
-                   ArrayList note_Context){
+                   ArrayList note_Context,
+                   ArrayList note_color){
         this.context = context;
        // this.note_id = note_id;
         this.note_Title = note_Title;
         this. note_SubTitle = note_SubTitle;
         this. note_Context = note_Context;
+        this. note_color = note_color;
 
     }
+   public static int count = 0;
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,10 +46,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.note_title_txt.setText(String.valueOf(note_Title.get(position)));
         holder.note_subTitle_txt.setText(String.valueOf(note_SubTitle.get(position)));
         holder.note_context_txt.setText(String.valueOf(note_Context.get(position)));
-        holder.cardBackground.setCardBackgroundColor(holder.itemView.getResources().getColor(R.color.test2,null));
+        String temp_color = (String) note_color.get(count);
+        count ++;
+        holder.real_layourt.setBackgroundColor(Color.parseColor(temp_color));
+
+       // holder.cardBackground.setCardBackgroundColor(holder.itemView.getResources().getColor(R.color.test2,null));
        // holder.real_layourt.setBackgroundColor(R.color.test1);
     }
 
+    private String colorpick() {
+       String temp;
+       temp = (String) note_color.get(count);
+       count++;
+    return temp;
+    }
     @Override
     public int getItemCount() {
 
