@@ -19,7 +19,7 @@ import com.example.noteme_app.databinding.FragmentSecondBinding;
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
-
+    Spinner mySpinner;
 
     @Override
     public View onCreateView(
@@ -47,16 +47,15 @@ public class SecondFragment extends Fragment {
         TextView  subtitle= (EditText) view.findViewById(R.id.Subtitle);
         TextView note_Context = (EditText) view.findViewById(R.id.type_notes);
 
-        Spinner mySpinner = (Spinner) view.findViewById(R.id.dropDown);
+        mySpinner = (Spinner) view.findViewById(R.id.dropDown);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.dropDrownMenu));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
 
 
-
         //TextView note_color= (EditText) view.findViewById(R.id.pick_color);
-        //Button  donw = (EditText) view.findViewById(R.id.button_done);
+        //Button  done = (EditText) view.findViewById(R.id.button_done);
         //String title1 = title.getText().toString().trim();
 
         binding.buttonDone.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +71,9 @@ public class SecondFragment extends Fragment {
                             subtitle.getText().toString().trim(),
                             note_Context.getText().toString().trim());
 
+                    //use the following line to update color
+                    //String state = mySpinner.getSelectedItem().toString();
+
                     NavHostFragment.findNavController(SecondFragment.this)
                             .navigate(R.id.action_SecondFragment_to_FirstFragment);
                 }
@@ -79,11 +81,9 @@ public class SecondFragment extends Fragment {
         });
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }

@@ -11,6 +11,6 @@
     <color name="light_blue">#cce5ff</color>
     <color name="dark_blue">#0053b3</color>
     <color name="darker_blue">#003066</color>
-    <color name= "test1">#99ff99</color>
+    <color name= "green">#99ff99</color>
     <color name = "test2">#eb99ff</color>
 </resources>
