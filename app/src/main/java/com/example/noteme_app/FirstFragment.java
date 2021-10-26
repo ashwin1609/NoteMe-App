@@ -44,23 +44,42 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
+             database = new MyDatabase(getContext());
+            Button update = (Button) view.findViewById(R.id.Update);
+            update.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
+                    note_id = new ArrayList<>();
+                    note_Title = new ArrayList<>();
+                    note_SubTitle = new ArrayList<>();
+                    note_Context = new ArrayList<>();
+                    note_color = new ArrayList<>();
+
+                    DisplayNote();
+                    customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context, note_color);
+                    recyclerView.setAdapter(customAdapter);
+                    StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+                    recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+                }
+            });
 
 
 
-        database = new MyDatabase(getContext());
+        //RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
+       // note_id = new ArrayList<>();
+       // note_Title = new ArrayList<>();
+       // note_SubTitle = new ArrayList<>();
+       // note_Context = new ArrayList<>();
+       // note_color = new ArrayList<>();
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
-        note_id = new ArrayList<>();
-        note_Title = new ArrayList<>();
-        note_SubTitle = new ArrayList<>();
-        note_Context = new ArrayList<>();
-        note_color = new ArrayList<>();
-
-        DisplayNote();
-        customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context, note_color);
-        recyclerView.setAdapter(customAdapter);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+       // DisplayNote();
+      //  customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context, note_color);
+       // recyclerView.setAdapter(customAdapter);
+      //  StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+      //  recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
         EditText search_txt = (EditText) view.findViewById(R.id.searchView);
         Button search_button = (Button) view.findViewById(R.id.Search_button);
@@ -68,6 +87,14 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String target = search_txt.getText().toString();
+                RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
+                note_id = new ArrayList<>();
+                note_Title = new ArrayList<>();
+                note_SubTitle = new ArrayList<>();
+                note_Context = new ArrayList<>();
+                note_color = new ArrayList<>();
+
+
                 DisplaySearchNote(target);
                 customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context, note_color);
                 recyclerView.setAdapter(customAdapter);
