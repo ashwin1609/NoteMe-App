@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,6 +28,7 @@ public class FirstFragment extends Fragment {
     MyDatabase database;
     ArrayList<String> note_id, note_Title, note_SubTitle, note_Context;
     CustomAdapter customAdapter;
+    private Button search_button;
 
 
     @Override
@@ -49,6 +52,9 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
+
+
+
         database = new MyDatabase(getContext());
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
@@ -62,7 +68,23 @@ public class FirstFragment extends Fragment {
         recyclerView.setAdapter(customAdapter);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+        EditText search_txt = (EditText) view.findViewById(R.id.searchView);
+        Button search_button = (Button) view.findViewById(R.id.Search_button);
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String target = search_txt.getText().toString();
+                DisplaySearchNote(target);
+                customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context);
+                recyclerView.setAdapter(customAdapter);
+                StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+            }
+        });
     }
+
 
         void DisplayNote() {
              Cursor cursor = database.getData();
@@ -70,7 +92,7 @@ public class FirstFragment extends Fragment {
             if(cursor.getCount() == 0){
                 Toast.makeText(getContext(), "NO available data in the database", Toast.LENGTH_SHORT).show();
             }else{
-                while  (cursor.moveToNext()){
+                while (cursor.moveToNext()){
                     note_id.add(cursor.getString(0));
                     note_Title.add(cursor.getString(1));
                     note_SubTitle.add(cursor.getString(2));
@@ -80,7 +102,26 @@ public class FirstFragment extends Fragment {
 
         }
 
+            void DisplaySearchNote(String target) {
+                Cursor cursor = database.getSearchData(target);
 
+                if(cursor.getCount() == 0){
+                    Toast.makeText(getContext(), "NO available data in the database", Toast.LENGTH_SHORT).show();
+                }else{
+                    note_id.clear();
+                    note_Title.clear();
+                    note_Context.clear();
+                    note_SubTitle.clear();
+                    while (cursor.moveToNext()){
+
+                        note_id.add(cursor.getString(0));
+                        note_Title.add(cursor.getString(1));
+                        note_SubTitle.add(cursor.getString(2));
+                        note_Context.add(cursor.getString(3));
+                    }
+                }
+
+            }
 
     @Override
     public void onDestroyView() {

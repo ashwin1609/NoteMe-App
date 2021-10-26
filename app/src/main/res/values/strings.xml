@@ -18,4 +18,5 @@
     <string name="title_view">Title</string>
     <string name="subtitle_view">Subtitle</string>
     <string name="note_context_view">Note Context</string>
+    <string name="search">Search</string>
 </resources>

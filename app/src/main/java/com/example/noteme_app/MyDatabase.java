@@ -18,6 +18,9 @@ public class MyDatabase  extends SQLiteOpenHelper {
     private static final String Column_Title = "Note_Title";
     private static final String Column_Subtitle = "Note_SubTitle";
     private static final String Column_Context = "Note_Context";
+    private static final String Column_Color = "Note_Color";
+
+
 
 
     public MyDatabase(Context context) {
@@ -32,6 +35,7 @@ public class MyDatabase  extends SQLiteOpenHelper {
                 Column_Title + " TEXT," +
                 Column_Subtitle + " TEXT," +
                 Column_Context + " TEXT);";
+
         db.execSQL(query);
 
     }
@@ -67,4 +71,17 @@ public class MyDatabase  extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    Cursor getSearchData( String target) {
+
+        String query = "SELECT * FROM " + Table_Name + " WHERE " + Column_Title +" Like " + "'" +target + "%'";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
 }
