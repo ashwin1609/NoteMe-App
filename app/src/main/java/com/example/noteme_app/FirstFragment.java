@@ -2,6 +2,8 @@ package com.example.noteme_app;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,18 +30,14 @@ public class FirstFragment extends Fragment {
     MyDatabase database;
     ArrayList<String> note_id, note_Title, note_SubTitle, note_Context;
     CustomAdapter customAdapter;
-    private Button search_button;
-
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -52,8 +50,6 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
-
-
 
         database = new MyDatabase(getContext());
 
@@ -70,63 +66,67 @@ public class FirstFragment extends Fragment {
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
         EditText search_txt = (EditText) view.findViewById(R.id.searchView);
-        Button search_button = (Button) view.findViewById(R.id.Search_button);
-        search_button.setOnClickListener(new View.OnClickListener() {
+        search_txt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    //customAdapter.cancelTimer();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 String target = search_txt.getText().toString();
                 DisplaySearchNote(target);
                 customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context);
                 recyclerView.setAdapter(customAdapter);
                 StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
-
             }
         });
+
     }
 
+    public void DisplayNote() {
+         Cursor cursor = database.getData();
 
-        void DisplayNote() {
-             Cursor cursor = database.getData();
-
-            if(cursor.getCount() == 0){
-                Toast.makeText(getContext(), "NO available data in the database", Toast.LENGTH_SHORT).show();
-            }else{
-                while (cursor.moveToNext()){
-                    note_id.add(cursor.getString(0));
-                    note_Title.add(cursor.getString(1));
-                    note_SubTitle.add(cursor.getString(2));
-                    note_Context.add(cursor.getString(3));
-                }
+        if(cursor.getCount() == 0){
+            Toast.makeText(getContext(), "No available data in the database", Toast.LENGTH_SHORT).show();
+        } else{
+            while (cursor.moveToNext()){
+                note_id.add(cursor.getString(0));
+                note_Title.add(cursor.getString(1));
+                note_SubTitle.add(cursor.getString(2));
+                note_Context.add(cursor.getString(3));
             }
+          }
+    }
 
+    public void DisplaySearchNote(String target) {
+        Cursor cursor = database.getSearchData(target);
+
+        if(cursor.getCount() == 0){
+            Toast.makeText(getContext(), "No available data in the database", Toast.LENGTH_SHORT).show();
+        }else{
+            note_id.clear();
+            note_Title.clear();
+            note_Context.clear();
+            note_SubTitle.clear();
+            while (cursor.moveToNext()){
+                note_id.add(cursor.getString(0));
+                note_Title.add(cursor.getString(1));
+                note_SubTitle.add(cursor.getString(2));
+                note_Context.add(cursor.getString(3));
+            }
         }
-
-            void DisplaySearchNote(String target) {
-                Cursor cursor = database.getSearchData(target);
-
-                if(cursor.getCount() == 0){
-                    Toast.makeText(getContext(), "NO available data in the database", Toast.LENGTH_SHORT).show();
-                }else{
-                    note_id.clear();
-                    note_Title.clear();
-                    note_Context.clear();
-                    note_SubTitle.clear();
-                    while (cursor.moveToNext()){
-
-                        note_id.add(cursor.getString(0));
-                        note_Title.add(cursor.getString(1));
-                        note_SubTitle.add(cursor.getString(2));
-                        note_Context.add(cursor.getString(3));
-                    }
-                }
-
-            }
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }

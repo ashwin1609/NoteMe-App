@@ -18,10 +18,7 @@ public class MyDatabase  extends SQLiteOpenHelper {
     private static final String Column_Title = "Note_Title";
     private static final String Column_Subtitle = "Note_SubTitle";
     private static final String Column_Context = "Note_Context";
-    private static final String Column_Color = "Note_Color";
-
-
-
+    //private static final String Column_Color = "Note_Color";
 
     public MyDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,9 +32,7 @@ public class MyDatabase  extends SQLiteOpenHelper {
                 Column_Title + " TEXT," +
                 Column_Subtitle + " TEXT," +
                 Column_Context + " TEXT);";
-
         db.execSQL(query);
-
     }
 
     @Override
