@@ -1,6 +1,7 @@
 package com.example.noteme_app;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -18,16 +19,19 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList note_Title, note_SubTitle, note_Context;
+
+    private ArrayList note_Title, note_SubTitle, note_Context, note_color;
+
     CustomAdapter( Context context,
                    ArrayList note_Title,
                    ArrayList note_SubTitle,
-                   ArrayList note_Context){
+                   ArrayList note_Context,
+                   ArrayList note_color){
         this.context = context;
-       // this.note_id = note_id;
         this.note_Title = note_Title;
         this. note_SubTitle = note_SubTitle;
         this. note_Context = note_Context;
+        this.note_color = note_color;
 
     }
     @NonNull
@@ -45,8 +49,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.note_title_txt.setText(String.valueOf(note_Title.get(position)));
         holder.note_subTitle_txt.setText(String.valueOf(note_SubTitle.get(position)));
         holder.note_context_txt.setText(String.valueOf(note_Context.get(position)));
-        holder.cardBackground.setCardBackgroundColor(holder.itemView.getResources().getColor(R.color.test2,null));
-       // holder.real_layourt.setBackgroundColor(R.color.test1);
+        //holder.cardBackground.setCardBackgroundColor(holder.itemView.getResources().getColor(R.color.test2,null));
+        //holder.cardBackground.setCardBackgroundColor(Color.parseColor(holder.itemView.getResources().getColor( note_color.get(position), null)
+       // holder.cardBackground.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
+            //    note_color.get(position)));
+       //holder.real_layourt.setBackgroundColor(Color.parseColor(note_color.get(position)));
+        if ( position >= 0 && position <= note_color.size() - 1) {
+            holder.temp.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
+        }
     }
 
     @Override
@@ -56,10 +66,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView note_id_txt, note_title_txt, note_subTitle_txt, note_context_txt;
-       // Layout rel_layout;
+        TextView note_title_txt, note_subTitle_txt, note_context_txt;
         CardView cardBackground;
-        RelativeLayout real_layourt;
+        RelativeLayout temp;
+
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -68,8 +78,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             note_subTitle_txt = itemView.findViewById(R.id.viewSubtitle);
             note_context_txt= itemView.findViewById(R.id.viewNote_context);
             cardBackground = itemView.findViewById(R.id.backgroundCard);
-            real_layourt = itemView.findViewById(R.id.rel_layout);
-            //rel_layout = itemView.findViewById(R.id.rel_layout);
+            temp = itemView.findViewById(R.id.rel_layout);
         }
     }
 }
