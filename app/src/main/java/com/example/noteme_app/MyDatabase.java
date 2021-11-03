@@ -18,7 +18,7 @@ public class MyDatabase  extends SQLiteOpenHelper {
     private static final String Column_Title = "Note_Title";
     private static final String Column_Subtitle = "Note_SubTitle";
     private static final String Column_Context = "Note_Context";
-    //private static final String Column_Color = "Note_Color";
+    private static final String Column_Color = "Note_Color";
 
     public MyDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -31,7 +31,8 @@ public class MyDatabase  extends SQLiteOpenHelper {
                 " (" + Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 Column_Title + " TEXT," +
                 Column_Subtitle + " TEXT," +
-                Column_Context + " TEXT);";
+                Column_Context + " TEXT," +
+                Column_Color + " TEXT);";
         db.execSQL(query);
     }
 
@@ -41,12 +42,13 @@ public class MyDatabase  extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addNote(String title, String subtitle, String note_Context) {
+    void addNote(String title, String subtitle, String note_Context, String note_color) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Column_Title, title);
         contentValues.put(Column_Subtitle, subtitle);
         contentValues.put(Column_Context, note_Context);
+        contentValues.put(Column_Color, note_color);
 
         long check_result = db.insert(Table_Name, null, contentValues);
         if (check_result == -1) {

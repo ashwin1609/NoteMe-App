@@ -28,7 +28,7 @@ public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
     MyDatabase database;
-    ArrayList<String> note_id, note_Title, note_SubTitle, note_Context;
+    ArrayList<String> note_id, note_Title, note_SubTitle, note_Context, note_color;
     CustomAdapter customAdapter;
 
     @Override
@@ -53,19 +53,18 @@ public class FirstFragment extends Fragment {
 
         database = new MyDatabase(getContext());
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
+
         note_id = new ArrayList<>();
         note_Title = new ArrayList<>();
         note_SubTitle = new ArrayList<>();
         note_Context = new ArrayList<>();
+        note_color = new ArrayList<>();
 
         DisplayNote();
-        customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context);
-        recyclerView.setAdapter(customAdapter);
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
+        callAdapter(view);
         EditText search_txt = (EditText) view.findViewById(R.id.searchView);
+
         search_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -81,13 +80,17 @@ public class FirstFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 String target = search_txt.getText().toString();
                 DisplaySearchNote(target);
-                customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context);
-                recyclerView.setAdapter(customAdapter);
-                StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-                recyclerView.setLayoutManager(staggeredGridLayoutManager);
+                callAdapter(view);
             }
         });
 
+    }
+    public void callAdapter(View view){
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
+        customAdapter = new CustomAdapter(getContext(),note_Title, note_SubTitle, note_Context, note_color);
+        recyclerView.setAdapter(customAdapter);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
     }
 
     public void DisplayNote() {
@@ -101,6 +104,8 @@ public class FirstFragment extends Fragment {
                 note_Title.add(cursor.getString(1));
                 note_SubTitle.add(cursor.getString(2));
                 note_Context.add(cursor.getString(3));
+                note_color.add(cursor.getString(4));
+
             }
           }
     }
@@ -115,11 +120,14 @@ public class FirstFragment extends Fragment {
             note_Title.clear();
             note_Context.clear();
             note_SubTitle.clear();
+            note_color.clear();
+
             while (cursor.moveToNext()){
                 note_id.add(cursor.getString(0));
                 note_Title.add(cursor.getString(1));
                 note_SubTitle.add(cursor.getString(2));
                 note_Context.add(cursor.getString(3));
+                note_color.add(cursor.getString(4));
             }
         }
     }

@@ -23,9 +23,9 @@
 
     <string-array name="dropDrownMenu" >
         <item> Pick a color for your note </item>
-        <item> Yellow </item>
-        <item> Red </item>
-        <item> Orange </item>
-        <item> Pink </item>
+        <item>Yellow</item>
+        <item>Red</item>
+        <item>Purple</item>
+        <item>Green</item>
     </string-array>
 </resources>
