@@ -53,7 +53,6 @@ public class FirstFragment extends Fragment {
 
         database = new MyDatabase(getContext());
 
-
         note_id = new ArrayList<>();
         note_Title = new ArrayList<>();
         note_SubTitle = new ArrayList<>();
@@ -61,7 +60,6 @@ public class FirstFragment extends Fragment {
         note_color = new ArrayList<>();
 
         DisplayNote();
-
         callAdapter(view);
         EditText search_txt = (EditText) view.findViewById(R.id.searchView);
 
@@ -83,7 +81,6 @@ public class FirstFragment extends Fragment {
                 callAdapter(view);
             }
         });
-
     }
     public void callAdapter(View view){
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
@@ -94,7 +91,7 @@ public class FirstFragment extends Fragment {
     }
 
     public void DisplayNote() {
-         Cursor cursor = database.getData();
+        Cursor cursor = database.getData();
 
         if(cursor.getCount() == 0){
             Toast.makeText(getContext(), "No available data in the database", Toast.LENGTH_SHORT).show();
@@ -105,7 +102,6 @@ public class FirstFragment extends Fragment {
                 note_SubTitle.add(cursor.getString(2));
                 note_Context.add(cursor.getString(3));
                 note_color.add(cursor.getString(4));
-
             }
           }
     }

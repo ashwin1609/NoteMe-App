@@ -49,13 +49,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.note_title_txt.setText(String.valueOf(note_Title.get(position)));
         holder.note_subTitle_txt.setText(String.valueOf(note_SubTitle.get(position)));
         holder.note_context_txt.setText(String.valueOf(note_Context.get(position)));
-        //holder.cardBackground.setCardBackgroundColor(holder.itemView.getResources().getColor(R.color.test2,null));
-        //holder.cardBackground.setCardBackgroundColor(Color.parseColor(holder.itemView.getResources().getColor( note_color.get(position), null)
-       // holder.cardBackground.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
-            //    note_color.get(position)));
-       //holder.real_layourt.setBackgroundColor(Color.parseColor(note_color.get(position)));
         if ( position >= 0 && position <= note_color.size() - 1) {
-            holder.temp.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
+            holder.cardBackground.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
         }
     }
 
@@ -68,9 +63,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView note_title_txt, note_subTitle_txt, note_context_txt;
         CardView cardBackground;
-        RelativeLayout temp;
-
-
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,7 +70,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             note_subTitle_txt = itemView.findViewById(R.id.viewSubtitle);
             note_context_txt= itemView.findViewById(R.id.viewNote_context);
             cardBackground = itemView.findViewById(R.id.backgroundCard);
-            temp = itemView.findViewById(R.id.rel_layout);
         }
     }
 }

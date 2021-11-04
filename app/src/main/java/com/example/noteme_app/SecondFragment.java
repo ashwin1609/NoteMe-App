@@ -82,7 +82,7 @@ public class SecondFragment extends Fragment {
         if( color.equals("Yellow")){
             temp = "#ffff99";
         } else if( color.equals("Purple")){
-            temp = "#b300b3";
+            temp = "#cc99ff";
         } else if( color.equals("Red")){
              temp = "#ff9999";
         } else if( color.equals("Green")){
