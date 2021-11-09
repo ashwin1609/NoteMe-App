@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(cursor.getCount() == 0){
-            Toast.makeText(MainActivity.this, "No available data in the database", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "No data found in database!", Toast.LENGTH_SHORT).show();
         } else{
             note_id.clear();
             note_Title.clear();
