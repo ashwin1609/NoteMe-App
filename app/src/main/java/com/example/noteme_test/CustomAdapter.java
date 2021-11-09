@@ -1,6 +1,8 @@
-package com.example.noteme_app;
+package com.example.noteme_test;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.text.Layout;
@@ -19,39 +21,56 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
-
-    private ArrayList note_Title, note_SubTitle, note_Context, note_color;
-
-    CustomAdapter( Context context,
+    int pos;
+    private ArrayList note_Title, note_SubTitle, note_Context, note_color, note_id;
+    Activity activity;
+    CustomAdapter( Activity activity, Context context,
+                   ArrayList note_id,
                    ArrayList note_Title,
                    ArrayList note_SubTitle,
                    ArrayList note_Context,
                    ArrayList note_color){
+        this.activity = activity;
         this.context = context;
+        this.note_id = note_id;
         this.note_Title = note_Title;
         this. note_SubTitle = note_SubTitle;
         this. note_Context = note_Context;
         this.note_color = note_color;
-
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-       View view =  inflater.inflate(R.layout.my_notes, parent,false);
+        View view =  inflater.inflate(R.layout.my_notes, parent,false);
         return new MyViewHolder(view);
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         holder.note_title_txt.setText(String.valueOf(note_Title.get(position)));
         holder.note_subTitle_txt.setText(String.valueOf(note_SubTitle.get(position)));
         holder.note_context_txt.setText(String.valueOf(note_Context.get(position)));
         if ( position >= 0 && position <= note_color.size() - 1) {
             holder.cardBackground.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
         }
+        holder.cardBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pos = holder.getAdapterPosition();
+                Intent intent = new Intent(context,UpdateActivity.class);
+                intent.putExtra("id", String.valueOf(note_id.get(pos)));
+                intent.putExtra("title", String.valueOf(note_Title.get(pos)));
+                intent.putExtra("subtitle", String.valueOf(note_SubTitle.get(pos)));
+                intent.putExtra("context", String.valueOf(note_Context.get(pos)));
+                intent.putExtra("color", String.valueOf(note_color.get(pos)));
+
+                //context.startActivity(intent);
+                activity.startActivityForResult(intent, 1);
+            }
+        });
     }
 
     @Override

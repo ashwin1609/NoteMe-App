@@ -1,4 +1,4 @@
-package com.example.noteme_app;
+package com.example.noteme_test;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,6 +34,7 @@ public class MyDatabase  extends SQLiteOpenHelper {
                 Column_Context + " TEXT," +
                 Column_Color + " TEXT);";
         db.execSQL(query);
+
     }
 
     @Override
@@ -81,4 +82,30 @@ public class MyDatabase  extends SQLiteOpenHelper {
         return cursor;
     }
 
+    void updateDatabase(String id, String title, String subtitle, String note_context, String note_color){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Column_Title , title);
+        contentValues.put(Column_Subtitle , subtitle);
+        contentValues.put(Column_Context , note_context);
+        contentValues.put(Column_Color , note_color);
+        long result = db.update (Table_Name, contentValues , Column_ID +"=?", new String[] {id} );
+
+        if(result == -1){
+            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show();
+        }else {
+            System.out.println(" the result is :"+ result);
+            Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
+    void DeleteRow(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete (Table_Name, Column_ID +"=?", new String[] {id} );
+        if(result == -1){
+            Toast.makeText(context, "Failed to Delete", Toast.LENGTH_SHORT).show();
+        }else {
+            System.out.println(" the result is :"+ result);
+            Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.noteme_app;
+package com.example.noteme_test;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.noteme_app", appContext.getPackageName());
+        assertEquals("com.example.noteme_test", appContext.getPackageName());
     }
 }

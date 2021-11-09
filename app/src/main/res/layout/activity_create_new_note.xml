@@ -5,35 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_blue"
-    tools:context=".SecondFragment">
+    tools:context=".CreateNewNote">
+
 
     <Button
         android:id="@+id/button_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/dark_blue"
         android:text="@string/done"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/type_notes" />
 
     <Button
         android:id="@+id/button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/dark_blue"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/type_notes" />
 
     <EditText
         android:id="@+id/Subtitle"
         android:layout_width="231dp"
         android:layout_height="50dp"
-        android:layout_marginTop="97dp"
+        android:layout_marginTop="20dp"
         android:autofillHints="No"
         android:ems="10"
         android:hint="@string/subtitle"
@@ -41,23 +40,21 @@
         android:minHeight="48dp"
         android:textColorHint="@color/hint_color"
         app:layout_constraintStart_toStartOf="@+id/Title"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
 
     <EditText
         android:id="@+id/Title"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
         android:autofillHints="no"
         android:ems="10"
         android:hint="@string/title"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="@color/hint_color"
-        app:layout_constraintBottom_toTopOf="@+id/Subtitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -67,10 +64,8 @@
         android:id="@+id/type_notes"
         android:layout_width="0dp"
         android:layout_height="400dp"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="135dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="137dp"
+        android:layout_marginBottom="125dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/type_notes"
@@ -78,8 +73,8 @@
         android:inputType="textMultiLine"
         android:textColorHint="@color/hint_color"
         app:layout_constraintBottom_toBottomOf="@+id/button_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Title"
+        app:layout_constraintStart_toStartOf="@+id/dropDown"
         app:layout_constraintTop_toBottomOf="@+id/Subtitle"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -87,12 +82,11 @@
         android:id="@+id/dropDown"
         android:layout_width="231dp"
         android:layout_height="50dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/type_notes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.177"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Subtitle"
         app:layout_constraintTop_toBottomOf="@+id/Subtitle"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintVertical_bias="0.428"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

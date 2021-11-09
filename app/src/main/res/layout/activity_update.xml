@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/update_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    tools:context=".UpdateActivity">
+
+    <Button
+        android:id="@+id/button_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/dark_blue"
+        android:text="@string/update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/type_notes2" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/dark_blue"
+        android:text="@string/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/type_notes2" />
+
+    <EditText
+        android:id="@+id/Subtitle2"
+        android:layout_width="231dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="No"
+        android:ems="10"
+        android:hint="@string/subtitle"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintStart_toStartOf="@+id/Title2"
+        app:layout_constraintTop_toBottomOf="@+id/Title2" />
+
+    <EditText
+        android:id="@+id/Title2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="no"
+        android:ems="10"
+        android:hint="@string/title"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/type_notes2"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginBottom="125dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/type_notes"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:textColorHint="@color/hint_color"
+        app:layout_constraintBottom_toBottomOf="@+id/button_delete"
+        app:layout_constraintEnd_toEndOf="@+id/Title2"
+        app:layout_constraintStart_toStartOf="@+id/dropDown"
+        app:layout_constraintTop_toBottomOf="@+id/Subtitle2"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/dropDown"
+        android:layout_width="231dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/type_notes2"
+        app:layout_constraintStart_toStartOf="@+id/Subtitle2"
+        app:layout_constraintTop_toBottomOf="@+id/Subtitle2"
+        app:layout_constraintVertical_bias="0.428"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
