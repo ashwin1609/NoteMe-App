@@ -1,6 +1,5 @@
 package com.example.noteme_test;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,12 +7,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,7 +18,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,9 +29,9 @@ public class CreateNewNote extends AppCompatActivity {
     Spinner mySpinner;
     Button buttonDone, buttonBack;
     TextView title, subtitle, note_Context;
-    LinearLayout imageAdd;
-    ImageView image;
-    Activity activity;
+
+    ImageView image_selection, camera;
+
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
 
@@ -49,8 +45,11 @@ public class CreateNewNote extends AppCompatActivity {
         note_Context = findViewById(R.id.type_notes);
         buttonDone = findViewById(R.id.button_done);
         buttonBack = findViewById(R.id.button_back);
-
+        image_selection = findViewById(R.id.image_destination);
         mySpinner =  findViewById(R.id.dropDown);
+        camera = findViewById(R.id.camera);
+
+
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(CreateNewNote.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.dropDrownMenu));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,11 +75,25 @@ public class CreateNewNote extends AppCompatActivity {
             }
         });
 
-        imageAdd = findViewById(R.id.layoutAddImage);
-        image  = findViewById(R.id.image2);
-        imageAdd.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+        image_selection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+
+                    ActivityCompat.requestPermissions(CreateNewNote.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+                }else {
+                    selectImage();
+                }
+            }
+        });
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(CreateNewNote.this,"On click works" , Toast.LENGTH_SHORT).show();
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
 
                     ActivityCompat.requestPermissions(CreateNewNote.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
@@ -103,13 +116,13 @@ public class CreateNewNote extends AppCompatActivity {
 
     public String getColor( String color ){
         String temp = " ";
-        if( color.equals("Yellow")){
+        if( color.equals("YELLOW")){
             temp = "#ffff99";
-        } else if( color.equals("Purple")){
+        } else if( color.equals("PURPLE")){
             temp = "#cc99ff";
-        } else if( color.equals("Red")){
+        } else if( color.equals("RED")){
             temp = "#ff9999";
-        } else if( color.equals("Green")){
+        } else if( color.equals("GREEN")){
             temp = "#b3e6b3";
         } else {
             temp = "#d9d9d9";
@@ -150,8 +163,8 @@ public class CreateNewNote extends AppCompatActivity {
                     try {
                         InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        image.setImageBitmap(bitmap);
-                        image.setVisibility(View.VISIBLE);
+                        image_selection.setImageBitmap(bitmap);
+                        image_selection.setVisibility(View.VISIBLE);
                     } catch (Exception e) {
                         Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }

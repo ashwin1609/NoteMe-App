@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/searchView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="10dp"
         android:hint="@string/search_notes"
@@ -53,13 +53,13 @@
 
     <ImageView
         android:id="@+id/search_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="47dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/todo"
-        android:src="@android:drawable/ic_search_category_default"
+        android:src="@drawable/ic_baseline_search_24"
         app:layout_constraintBottom_toTopOf="@+id/recycleView"
         app:layout_constraintEnd_toStartOf="@+id/searchView"
         app:layout_constraintStart_toStartOf="parent"
