@@ -14,6 +14,7 @@
     <string name="todo1">TODO1</string>
     <string name="update">update</string>
     <string name="delete">Delete</string>
+    <string name="add_image">Add Image</string>
 
 
     <string-array name="dropDrownMenu">
