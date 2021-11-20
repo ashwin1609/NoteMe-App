@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -23,6 +24,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 
 
@@ -35,7 +38,7 @@ public class CreateNewNote extends AppCompatActivity {
 
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
-
+    private static final int CAMERA_REQUEST = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,9 +88,13 @@ public class CreateNewNote extends AppCompatActivity {
         image_selection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
 
-                    ActivityCompat.requestPermissions(CreateNewNote.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+                    ActivityCompat.requestPermissions(CreateNewNote.this,
+                            new String[]{
+                                    Manifest.permission.READ_EXTERNAL_STORAGE},
+                            REQUEST_CODE_STORAGE_PERMISSION);
                 }else {
                     selectImage();
                 }
@@ -97,11 +104,15 @@ public class CreateNewNote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(CreateNewNote.this,"On click works" , Toast.LENGTH_SHORT).show();
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                if (ContextCompat.checkSelfPermission(CreateNewNote.this,
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
 
-                    ActivityCompat.requestPermissions(CreateNewNote.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
+                    ActivityCompat.requestPermissions(CreateNewNote.this,
+                            new String[]{
+                                    Manifest.permission.CAMERA},
+                            100);
                 }else {
-                    selectImage();
+                    selectCamera();
                 }
             }
         });
@@ -140,6 +151,10 @@ public class CreateNewNote extends AppCompatActivity {
             startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE);
         }*/
     }
+    public void selectCamera(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 100);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -153,6 +168,7 @@ public class CreateNewNote extends AppCompatActivity {
 
                 Toast.makeText(this,"Permission Denied" , Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 
@@ -176,7 +192,45 @@ public class CreateNewNote extends AppCompatActivity {
                 }
             }
         }
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK){
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imageDestination.setImageBitmap(photo);
+            imageDestination.setVisibility(View.VISIBLE);
+            // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
+            Uri tempUri = getImageUri_camera(getApplicationContext(), photo);
+
+            // CALL THIS METHOD TO GET THE ACTUAL PATH
+            File finalFile = new File(getRealPathFromURI(tempUri));
+            imagePath =  String.valueOf(finalFile);
+            //System.out.println("This is the path" + finalFile);
+
+        }
     }
+
+
+
+    public Uri getImageUri_camera(Context inContext, Bitmap inImage) {
+        Bitmap OutImage = Bitmap.createScaledBitmap(inImage, 1000, 1000,true);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), OutImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        String path = "";
+        if (getContentResolver() != null) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                path = cursor.getString(idx);
+                cursor.close();
+            }
+        }
+        return path;
+    }
+
+
+
 
 
     private String getPathFromUri(Uri contentUri){
