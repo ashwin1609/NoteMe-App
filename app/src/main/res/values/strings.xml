@@ -1,28 +1,29 @@
 <resources>
     <string name="app_name">NoteMe</string>
-    <string name="search_notes">search_notes</string>
+    <string name="search_notes">SEARCH NOTE</string>
     <string name="todo">TODO</string>
-    <string name="new_note">new_note</string>
-    <string name="done">done</string>
-    <string name="back">back</string>
-    <string name="subtitle">subtitle</string>
-    <string name="title">title</string>
-    <string name="type_notes">type_notes</string>
+    <string name="new_note">NEW NOTE</string>
+    <string name="done">DONE</string>
+    <string name="back">BACK</string>
+    <string name="subtitle">SUBTITLE</string>
+    <string name="title">TITLE</string>
+    <string name="type_notes">TYPE NOTE</string>
     <string name="title_view">title_view</string>
     <string name="subtitle_view">subtitle_view</string>
     <string name="note_context_view">note_context_view</string>
     <string name="todo1">TODO1</string>
-    <string name="update">update</string>
-    <string name="delete">Delete</string>
+    <string name="update">UPDATE</string>
+    <string name="delete">DELETE</string>
     <string name="add_image">Add Image</string>
+    <string name="stored_image">Stored_Image</string>
 
 
     <string-array name="dropDrownMenu">
-        <item> Pick a color for your note </item>
-        <item>Yellow</item>
-        <item>Red</item>
-        <item>Purple</item>
-        <item>Green</item>
+        <item>Pick a color</item>
+        <item>YELLOW</item>
+        <item>RED</item>
+        <item>PURPLE</item>
+        <item>GREEN</item>
     </string-array>
 
 </resources>

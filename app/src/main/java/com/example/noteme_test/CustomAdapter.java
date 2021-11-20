@@ -3,12 +3,14 @@ package com.example.noteme_test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,14 +24,20 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
     int pos;
-    private ArrayList note_Title, note_SubTitle, note_Context, note_color, note_id;
+    private final ArrayList note_Title;
+    private final ArrayList note_SubTitle;
+    private final ArrayList note_Context;
+    private final ArrayList note_color;
+    private final ArrayList note_id;
+    private final ArrayList note_image;
     Activity activity;
     CustomAdapter( Activity activity, Context context,
                    ArrayList note_id,
                    ArrayList note_Title,
                    ArrayList note_SubTitle,
                    ArrayList note_Context,
-                   ArrayList note_color){
+                   ArrayList note_color,
+                   ArrayList note_image){
         this.activity = activity;
         this.context = context;
         this.note_id = note_id;
@@ -37,6 +45,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this. note_SubTitle = note_SubTitle;
         this. note_Context = note_Context;
         this.note_color = note_color;
+        this.note_image = note_image;
     }
     @NonNull
     @Override
@@ -49,12 +58,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        if (note_image.get(position) != null){
+            holder.imageSelection.setImageBitmap(BitmapFactory.decodeFile(String.valueOf(note_image.get(position))));
+            holder.imageSelection.setVisibility(View.VISIBLE);
+        }
         holder.note_title_txt.setText(String.valueOf(note_Title.get(position)));
         holder.note_subTitle_txt.setText(String.valueOf(note_SubTitle.get(position)));
         holder.note_context_txt.setText(String.valueOf(note_Context.get(position)));
         if ( position >= 0 && position <= note_color.size() - 1) {
-            holder.cardBackground.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
+           // holder.cardBackground.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
+            holder.relativeLayout.setBackgroundColor(Color.parseColor(String.valueOf(note_color.get(position))));
         }
         holder.cardBackground.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +84,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 activity.startActivityForResult(intent, 1);
             }
         });
+
     }
 
     @Override
@@ -82,6 +96,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView note_title_txt, note_subTitle_txt, note_context_txt;
         CardView cardBackground;
+        ImageView imageSelection;
+        RelativeLayout relativeLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -89,6 +105,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             note_subTitle_txt = itemView.findViewById(R.id.viewSubtitle);
             note_context_txt= itemView.findViewById(R.id.viewNote_context);
             cardBackground = itemView.findViewById(R.id.backgroundCard);
+            imageSelection = itemView.findViewById(R.id.image_selected_view);
+            relativeLayout = itemView.findViewById(R.id.rel_layout);
+
         }
     }
 }

@@ -19,6 +19,7 @@ public class MyDatabase  extends SQLiteOpenHelper {
     private static final String Column_Subtitle = "Note_SubTitle";
     private static final String Column_Context = "Note_Context";
     private static final String Column_Color = "Note_Color";
+    private static final String Column_imagePath = "Note_Image";
 
     public MyDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,7 +33,8 @@ public class MyDatabase  extends SQLiteOpenHelper {
                 Column_Title + " TEXT," +
                 Column_Subtitle + " TEXT," +
                 Column_Context + " TEXT," +
-                Column_Color + " TEXT);";
+                Column_Color + " TEXT," +
+                Column_imagePath + " TEXT);";
         db.execSQL(query);
 
     }
@@ -43,13 +45,15 @@ public class MyDatabase  extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addNote(String title, String subtitle, String note_Context, String note_color) {
+    void addNote(String title, String subtitle, String note_Context, String note_color, String note_image) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Column_Title, title);
         contentValues.put(Column_Subtitle, subtitle);
         contentValues.put(Column_Context, note_Context);
         contentValues.put(Column_Color, note_color);
+        contentValues.put(Column_imagePath, note_image);
+
 
         long check_result = db.insert(Table_Name, null, contentValues);
         if (check_result == -1) {
