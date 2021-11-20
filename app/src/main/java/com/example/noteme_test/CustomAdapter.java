@@ -84,12 +84,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 activity.startActivityForResult(intent, 1);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-
         return note_Title.size();
     }
 

@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     CustomAdapter customAdapter;
     public EditText search_txt;
     public FloatingActionButton buttonAdd;
+    public ImageView exportImage;
     public boolean displaySearchNote = false;
     public String target;
 
@@ -32,12 +37,24 @@ public class MainActivity extends AppCompatActivity {
 
         search_txt = findViewById(R.id.searchView);
         buttonAdd = findViewById(R.id.button_add);
+        exportImage = findViewById(R.id.export_image);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CreateNewNote.class);
                 startActivity(intent);
+            }
+        });
+
+        exportImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    database.exportJSONFile();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

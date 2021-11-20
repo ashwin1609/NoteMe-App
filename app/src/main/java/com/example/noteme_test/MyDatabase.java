@@ -1,11 +1,22 @@
 package com.example.noteme_test;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class MyDatabase  extends SQLiteOpenHelper {
 
@@ -111,5 +122,30 @@ public class MyDatabase  extends SQLiteOpenHelper {
             System.out.println(" the result is :"+ result);
             Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void exportJSONFile() throws JSONException {
+        Cursor cursor = getData();
+        JSONArray jsonArray = new JSONArray();
+        JSONObject obj = new JSONObject();
+        while(cursor.moveToNext()) {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put(Column_ID, cursor.getString(0));
+            jsonObj.put(Column_Title, cursor.getString(1));
+            jsonObj.put(Column_Subtitle, cursor.getString(2));
+            jsonObj.put(Column_Context, cursor.getString(3));
+            jsonObj.put(Column_Color, cursor.getString(4));
+            jsonArray.put(jsonObj);
+        }
+        obj.put("notes", jsonArray);
+        try {
+            FileOutputStream fos = context.openFileOutput("notes.json", MODE_PRIVATE);
+            fos.write(obj.toString().getBytes(StandardCharsets.UTF_8));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(context, "JSON File Exported Successfully!", Toast.LENGTH_SHORT).show();
     }
 }

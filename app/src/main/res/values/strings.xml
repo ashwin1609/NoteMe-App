@@ -16,6 +16,7 @@
     <string name="delete">DELETE</string>
     <string name="add_image">Add Image</string>
     <string name="stored_image">Stored_Image</string>
+    <string name="export_to_json">Export To JSON</string>
 
 
     <string-array name="dropDrownMenu">

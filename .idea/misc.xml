@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Android Studio/EsamNoteMe/NoteMe-App/app/src/main/res/layout/activity_create_new_note.xml" value="0.3026041666666667" />
+        <entry key="..\:/Projects/Android Studio/EsamNoteMe/NoteMe-App/app/src/main/res/layout/activity_main.xml" value="0.3026041666666667" />
+        <entry key="..\:/Projects/Android Studio/EsamNoteMe/NoteMe-App/app/src/main/res/layout/my_notes.xml" value="0.1" />
         <entry key="..\:/Projects/Android Studio/NoteMe-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3489583333333333" />
         <entry key="..\:/Projects/Android Studio/NoteMe-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3489583333333333" />
         <entry key="..\:/Projects/Android Studio/NoteMe-App/app/src/main/res/layout/activity_main.xml" value="0.22" />
