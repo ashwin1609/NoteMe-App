@@ -15,11 +15,12 @@
         <entry key="..\:/Users/mihir/Documents/GitHub/NoteMe-App/app/src/main/res/layout/fragment_first.xml" value="0.1" />
         <entry key="..\:/Users/mihir/Documents/GitHub/NoteMe-App/app/src/main/res/layout/fragment_second.xml" value="0.4" />
         <entry key="app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_create_new_note.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_update.xml" value="0.1983695652173913" />
-        <entry key="app/src/main/res/layout/my_notes.xml" value="0.13177083333333334" />
+        <entry key="app/src/main/res/layout/my_notes.xml" value="0.25" />
       </map>
     </option>
   </component>

@@ -108,13 +108,11 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/add_image"
-        android:focusable="true"
-        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/Subtitle"
         app:layout_constraintStart_toEndOf="@+id/Subtitle"
         app:layout_constraintTop_toBottomOf="@+id/Title"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_baseline_image_24"
         tools:ignore="ImageContrastCheck" />
 
     <ImageView

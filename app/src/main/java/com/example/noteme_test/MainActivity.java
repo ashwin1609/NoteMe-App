@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     MyDatabase database;
-    ArrayList<String> note_id, note_Title, note_SubTitle, note_Context, note_color;
+    ArrayList<String> note_id, note_Title, note_SubTitle, note_Context, note_color, note_image;
     CustomAdapter customAdapter;
     public EditText search_txt;
     public FloatingActionButton buttonAdd;
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         note_SubTitle = new ArrayList<>();
         note_Context = new ArrayList<>();
         note_color = new ArrayList<>();
+        note_image = new ArrayList<>();
 
         DisplayNote(target);
         callAdapter();
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void callAdapter(){
         RecyclerView recyclerView = findViewById(R.id.recycleView);
-        customAdapter = new CustomAdapter(MainActivity.this,this,note_id,note_Title, note_SubTitle, note_Context, note_color);
+        customAdapter = new CustomAdapter(MainActivity.this,this,note_id,note_Title, note_SubTitle, note_Context, note_color, note_image);
         recyclerView.setAdapter(customAdapter);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             note_Context.clear();
             note_SubTitle.clear();
             note_color.clear();
+            note_image.clear();
 
             while (cursor.moveToNext()){
                 note_id.add(cursor.getString(0));
@@ -109,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 note_SubTitle.add(cursor.getString(2));
                 note_Context.add(cursor.getString(3));
                 note_color.add(cursor.getString(4));
+                note_image.add(cursor.getString(5));
+
             }
         }
     }

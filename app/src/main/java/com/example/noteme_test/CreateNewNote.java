@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -29,8 +30,8 @@ public class CreateNewNote extends AppCompatActivity {
     Spinner mySpinner;
     Button buttonDone, buttonBack;
     TextView title, subtitle, note_Context;
-
-    ImageView image_selection, camera;
+    String imagePath;
+    ImageView image_selection, camera,imageDestination;
 
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
     private static final int REQUEST_CODE_SELECT_IMAGE = 2;
@@ -45,9 +46,11 @@ public class CreateNewNote extends AppCompatActivity {
         note_Context = findViewById(R.id.type_notes);
         buttonDone = findViewById(R.id.button_done);
         buttonBack = findViewById(R.id.button_back);
-        image_selection = findViewById(R.id.image_destination);
+
         mySpinner =  findViewById(R.id.dropDown);
         camera = findViewById(R.id.camera);
+        image_selection = findViewById(R.id.image_selection);
+        imageDestination = findViewById(R.id.image_destination);
 
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(CreateNewNote.this,
@@ -68,7 +71,7 @@ public class CreateNewNote extends AppCompatActivity {
                     database.addNote(title.getText().toString().trim(),
                             subtitle.getText().toString().trim(),
                             note_Context.getText().toString().trim(),
-                            note_color);
+                            note_color,String.valueOf(imagePath));
                     Intent intent = new Intent(CreateNewNote.this, MainActivity.class);
                     startActivity(intent);
                 }
@@ -163,13 +166,34 @@ public class CreateNewNote extends AppCompatActivity {
                     try {
                         InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        image_selection.setImageBitmap(bitmap);
-                        image_selection.setVisibility(View.VISIBLE);
+                        imageDestination.setImageBitmap(bitmap);
+                        imageDestination.setVisibility(View.VISIBLE);
+                        imagePath = getPathFromUri(selectedImageUri);
+                       // subtitle.setText(imagePath);
                     } catch (Exception e) {
                         Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         }
+    }
+
+
+    private String getPathFromUri(Uri contentUri){
+        String filepath;
+        Cursor cursor = getContentResolver()
+                .query(contentUri, null, null,null,null);
+        if(cursor == null){
+            filepath = contentUri.getPath();
+
+        }else{
+            cursor.moveToFirst();
+            // gets the data path
+            int index = cursor.getColumnIndex("_data");
+            filepath = cursor.getString(index);
+            cursor.close();
+
+        }
+        return filepath;
     }
 }
