@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +57,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        if (note_image.get(position) != null){
-            holder.imageSelection.setImageBitmap(BitmapFactory.decodeFile(String.valueOf(note_image.get(position))));
-            holder.imageSelection.setVisibility(View.VISIBLE);
-        }
+
         holder.note_title_txt.setText(String.valueOf(note_Title.get(position)));
         holder.note_subTitle_txt.setText(String.valueOf(note_SubTitle.get(position)));
         holder.note_context_txt.setText(String.valueOf(note_Context.get(position)));
@@ -84,6 +80,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 activity.startActivityForResult(intent, 1);
             }
         });
+        if (!note_image.get(position).equals("NoImage")){
+            holder.imageSelection.setImageBitmap(BitmapFactory.decodeFile(String.valueOf(note_image.get(position))));
+            holder.imageSelection.setVisibility(View.VISIBLE);
+        }else {
+            holder.imageSelection.setVisibility(View.GONE);
+        }
     }
 
     @Override
