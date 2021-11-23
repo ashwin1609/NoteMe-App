@@ -87,13 +87,13 @@ public class UpdateActivity extends AppCompatActivity {
 
     public String getColor( String color ){
         String temp = " ";
-        if( color.equals("Yellow")){
+        if( color.equals("YELLOW")){
             temp = "#ffff99";
-        } else if( color.equals("Purple")){
+        } else if( color.equals("PURPLE")){
             temp = "#cc99ff";
-        } else if( color.equals("Red")){
+        } else if( color.equals("RED")){
             temp = "#ff9999";
-        } else if( color.equals("Green")){
+        } else if( color.equals("GREEN")){
             temp = "#b3e6b3";
         } else {
             temp = "#d9d9d9";

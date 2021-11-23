@@ -135,6 +135,7 @@ public class MyDatabase  extends SQLiteOpenHelper {
             jsonObj.put(Column_Subtitle, cursor.getString(2));
             jsonObj.put(Column_Context, cursor.getString(3));
             jsonObj.put(Column_Color, cursor.getString(4));
+            jsonObj.put(Column_imagePath, cursor.getString(5));
             jsonArray.put(jsonObj);
         }
         obj.put("notes", jsonArray);

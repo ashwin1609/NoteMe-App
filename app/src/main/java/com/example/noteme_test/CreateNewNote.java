@@ -33,7 +33,7 @@ public class CreateNewNote extends AppCompatActivity {
     Spinner mySpinner;
     Button buttonDone, buttonBack;
     TextView title, subtitle, note_Context;
-    String imagePath;
+    String imagePath = "NoImage";
     ImageView image_selection, camera,imageDestination;
 
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
