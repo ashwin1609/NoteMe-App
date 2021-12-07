@@ -122,7 +122,7 @@ public class CreateNewNote extends AppCompatActivity {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CreateNewNote.this, MainActivity.class);
+                Intent intent = new Intent(CreateNewNote.this, Drawshape.class);
                 startActivity(intent);
             }
         });
@@ -165,7 +165,6 @@ public class CreateNewNote extends AppCompatActivity {
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED ){
                 selectImage();
             }else{
-
                 Toast.makeText(this,"Permission Denied" , Toast.LENGTH_SHORT).show();
             }
 
