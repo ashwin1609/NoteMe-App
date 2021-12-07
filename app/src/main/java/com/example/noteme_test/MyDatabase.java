@@ -86,7 +86,6 @@ public class MyDatabase  extends SQLiteOpenHelper {
     }
 
     Cursor getSearchData( String target) {
-
         String query = "SELECT * FROM " + Table_Name + " WHERE " + Column_Title +" Like " + "'" +target + "%'";
         SQLiteDatabase db = this.getReadableDatabase();
 
